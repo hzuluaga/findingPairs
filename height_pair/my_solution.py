@@ -76,7 +76,7 @@ def printPairs(total_pairs, p_list):
                 f"{p_list[ele[1]]['first_name']} {p_list[ele[1]]['last_name']}({p_list[ele[1]]['h_in']})")
 
     else:
-        print(f"No pairs were found!")
+        print(f"No matches found!")
 
 
 # Main
@@ -93,4 +93,4 @@ if __name__ == '__main__':
         printPairs(existing_pairs, players)
 
     else:
-        print(f"No pairs were found!")
+        print(f"No matches found!")
