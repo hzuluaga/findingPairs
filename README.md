@@ -19,7 +19,7 @@ matches are found, the application will print "No matches found"
 Clone the project
 
 ```bash
-  https://github.com/hzuluaga/findingPairs.git
+  git clone https://github.com/hzuluaga/findingPairs.git
 ```
 
 Go to the project directory

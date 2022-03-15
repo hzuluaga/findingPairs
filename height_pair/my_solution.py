@@ -4,19 +4,33 @@ import time
 
 
 def getData():
-    """fetches JSON data from URL"""
+    """
+    fetches JSON data from URL
+    :return: List of players with a json structure
+    """
     api_url = "https://mach-eight.uc.r.appspot.com/"
     with urlopen(api_url) as response:
         json_response = json.load(response)
         return json_response['values']
 
 def sortData(data):
-    data.sort(key=lambda x: x['h_in'])
+    """
+    sorts data by attribute 'h_in' in increasing order
+    :param data: list with players information in json format
+    :return:  sorted list by attribute 'h_in' in increasing order
+    """
+    data.sort(key=lambda p: int(p['h_in']))
     return data
 
 def createHashTable(p_list):
-    """Creates a dictionary where the (key, value) pair corresponds to
-    ('height', [players_ids with that height value])  """
+    """
+    Creates a dictionary where the (key, value) pair corresponds to
+    ('height', [players_ids with that height value])
+    :param p_list: sorted players list
+    :return: dictionary composed by (key, value) pairs, where:
+        key = 'height'
+        value = [players_ids with height]
+    """
     hashed_dict = dict()
     size = len(p_list)
     for i in range(size):
@@ -29,7 +43,12 @@ def createHashTable(p_list):
 
 
 def find_pairs(h_sum, p_list):
-    """ find all pairs of players within a sorted list that the sum of their heights equals a given value sum """
+    """
+    find all pairs of players within a sorted list that the sum of their heights equals a given value sum
+    :param h_sum: height sum input by user
+    :param p_list: sorted players list
+    :return: set of tuples corresponding to all pairs of players ids which sum of heights equals h_sum
+    """
     start = time.time()
     # creates the dictionary with players_ids and height as key
     hashed_players_by_height = createHashTable(p_list)
@@ -59,7 +78,11 @@ def find_pairs(h_sum, p_list):
 
 
 def getMinMaxHeightSums(p_list):
-    """calculates the minimum and maximum height sum for a sorted list of players"""
+    """
+    calculates the minimum and maximum height sum for a sorted list of players
+    :param p_list: sorted players list
+    :return: Min and Max sums of heights
+    """
 
     min_s = int(p_list[0]['h_in']) + int(p_list[1]['h_in'])
     max_s = int(p_list[-1]['h_in']) + int(p_list[-2]['h_in'])
@@ -68,7 +91,12 @@ def getMinMaxHeightSums(p_list):
 
 
 def printPairs(total_pairs, p_list):
-    """"Prints all players pairs given a set of players ids and a list of players"""
+    """"
+    Prints all players pairs given a set of players ids and a list of players
+    :param total_pairs: set of tuples representing the players ids pairs
+    :param p_list: sorted players list
+    :return: prints all players names pairs
+    """
     if len(total_pairs):
         for ele in total_pairs:
             print(
@@ -82,11 +110,12 @@ def printPairs(total_pairs, p_list):
 # Main
 if __name__ == '__main__':
 
+    # sorts data by increasing order of 'h_in' field
     players = sortData(getData())
     min_sum, max_sum = getMinMaxHeightSums(players)
 
     x = int(input("Enter SUM of Heights = "))
-
+    # checks whether input value is between min and max sums of heights of current sorted players list
     if (x <= max_sum) and (x >= min_sum):
 
         existing_pairs = find_pairs(x, players)
