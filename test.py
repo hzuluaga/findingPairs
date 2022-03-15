@@ -99,11 +99,11 @@ class TestHeightPair(unittest.TestCase):
         sorted = my_solution.sortData(values)
 
         pairs = my_solution.find_pairs(153, sorted)
-        self.assertEqual(len(pairs), 1, 'Size match')
+        self.assertEqual(len(pairs), 1, 'Size does not match!')
         pairs = my_solution.find_pairs(152, sorted)
-        self.assertEqual(len(pairs), 2, 'Size match')
+        self.assertEqual(len(pairs), 2, 'Size does not match!')
         pairs = my_solution.find_pairs(200, sorted)
-        self.assertEqual(len(pairs), 0, 'Size match')
+        self.assertEqual(len(pairs), 0, 'Size does not match!')
 
 
     def test_brute_vs_optimized_methods(self):
@@ -113,5 +113,5 @@ class TestHeightPair(unittest.TestCase):
 
         brute_force_pairs = self.bruteForceMethod(161, sorted_list)
         opt_pairs = my_solution.find_pairs(161, sorted_list)
-        self.assertEqual(brute_force_pairs, opt_pairs, 'Sets are equal')
+        self.assertEqual(brute_force_pairs, opt_pairs, 'Sets are not equal!')
 
